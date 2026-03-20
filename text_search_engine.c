@@ -6,17 +6,18 @@
 
 void metinAra(const char *dosyaAdi, const char *arananKelime) {
     FILE *fp = fopen(dosyaAdi, "r");
+    FILE *out = fopen("sonuc.txt", "w");
     char satir[MAX_LINE_LENGTH];
     int satirNumarasi = 0;
     int toplamTekrar = 0;
     int kelimeBulunduMu = 0;
 
     if (fp == NULL) {
-        printf("Hata: Dosya acilamadi (%s)\n", dosyaAdi);
+        fprintf("Hata: Dosya acilamadi (%s)\n", dosyaAdi);
         return;
     }
 
-    printf("\n--- Arama Sonuclari ---\n");
+    fprintf("\n--- Arama Sonuclari ---\n");
 
     while (fgets(satir, MAX_LINE_LENGTH, fp)) {
         satirNumarasi++;
@@ -41,7 +42,8 @@ void metinAra(const char *dosyaAdi, const char *arananKelime) {
         printf("Kelime dosya icerisinde bulunamadi.\n");
     }
 
-    fclose(fp);
+    fclose(fp); 
+    fclose(out);
 }
 
 int main() {
@@ -55,6 +57,7 @@ int main() {
     scanf("%s", dosyaAdi);
 
     metinAra(dosyaAdi, arananKelime);
+    printf("Sonuclar 'sonuc.txt' dosyasina yazildi.\n");
 
     return 0;
 }
